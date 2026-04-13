@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>💖 super fun hug into 2083 – happy new year sweetheart 💖</title>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            user-select: none;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(145deg, #ffe6f0 0%, #ffd4e5 40%, #fff0f5 100%);
+            background-attachment: fixed;
+            font-family: 'Quicksand', 'Segoe UI', system-ui, sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem;
+            position: relative;
+            overflow-x: hidden;
+            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="27" viewBox="0 0 24 27"><path fill="hotpink" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>') 12 22, auto;
+        }
+
+        .sparkle-bg {
+            position: fixed;
+            pointer-events: none;
+            background: radial-gradient(circle, #fff0c0, #ffcfdf);
+            border-radius: 50%;
+            opacity: 0.3;
+            animation: floatSparkle 8s infinite alternate;
+            z-index: 0;
+        }
+        @keyframes floatSparkle {
+            0% { transform: translateY(0px) scale(1); opacity: 0.1; }
+            100% { transform: translateY(-50px) scale(1.3); opacity: 0.5; }
+        }
+
+        .card {
+            position: relative;
+            z-index: 30;
+            max-width: 750px;
+            width: 100%;
+            background: rgba(255, 248, 250, 0.85);
+            backdrop-filter: blur(14px);
+            border-radius: 3.2rem;
+            padding: 2rem 1.8rem 2rem;
+            box-shadow: 0 30px 45px rgba(255, 105, 180, 0.2), 0 0 0 1px rgba(255, 220, 210, 0.8);
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.7);
+        }
+
+        h1 {
+            font-family: 'Pacifico', cursive;
+            font-size: 2.5rem;
+            font-weight: 400;
+            background: linear-gradient(135deg, #dd5a82, #ff8c94, #ffb55a);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            margin-bottom: 0.3rem;
+        }
+
+        .sub {
+            font-size: 0.9rem;
+            background: #ffe2edc9;
+            display: inline-block;
+            padding: 0.3rem 1rem;
+            border-radius: 40px;
+            color: #b34e71;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .countdown-box {
+            background: rgba(255, 240, 245, 0.8);
+            border-radius: 2rem;
+            padding: 0.9rem;
+            margin: 0.8rem 0 1rem;
+        }
+        .countdown-label {
+            font-size: 0.7rem;
+            letter-spacing: 2px;
+            color: #c46586;
+            font-weight: 700;
+        }
+        .timer {
+            display: flex;
+            justify-content: center;
+            gap: 0.8rem;
+            flex-wrap: wrap;
+            margin-top: 0.5rem;
+        }
+        .time-card {
+            background: #ffffffcc;
+            border-radius: 1.5rem;
+            padding: 0.4rem 0.7rem;
+            min-width: 65px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+        .time-number {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: #e85d8b;
+            line-height: 1;
+        }
+        .time-label {
+            font-size: 0.6rem;
+            color: #b57294;
+            font-weight: 600;
+        }
+
+        .hug-btn {
+            background: linear-gradient(125deg, #ffa0b0, #ffcdc0);
+            border: none;
+            padding: 1rem 1.5rem;
+            margin: 0.8rem 0 1rem;
+            border-radius: 5rem;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #fff4f0;
+            cursor: pointer;
+            box-shadow: 0 12px 20px #ffb0be;
+            transition: 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            width: auto;
+            min-width: 260px;
+            justify-content: center;
+            animation: softPulse 1.8s infinite;
+        }
+        @keyframes softPulse {
+            0% { transform: scale(1); box-shadow: 0 8px 18px #ffb0be; }
+            50% { transform: scale(1.02); box-shadow: 0 14px 28px #ff8aa8; }
+            100% { transform: scale(1); box-shadow: 0 8px 18px #ffb0be; }
+        }
+        .hug-btn:hover { transform: scale(1.02); background: #ff96a8; animation: none; }
+        .hug-btn:active { transform: scale(0.96); }
+
+        .widgets {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+            margin: 0.8rem 0;
+        }
+        .widget-card {
+            background: rgba(255, 240, 250, 0.9);
+            border-radius: 1.8rem;
+            padding: 0.7rem 1rem;
+            flex: 1;
+            min-width: 130px;
+            backdrop-filter: blur(4px);
+            cursor: pointer;
+            transition: 0.2s;
+            border: 1px solid #ffcddf;
+        }
+        .widget-card:hover { background: #ffeef4; transform: translateY(-4px); }
+        .widget-title {
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: #b34e71;
+        }
+        .widget-value {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #ff7c9e;
+        }
+
+        .fun-buttons {
+            display: flex;
+            gap: 0.8rem;
+            justify-content: center;
+            margin: 0.5rem 0;
+            flex-wrap: wrap;
+        }
+        .fun-btn {
+            background: #ffe0ec;
+            border: none;
+            border-radius: 2rem;
+            padding: 0.5rem 1.2rem;
+            font-weight: bold;
+            color: #b64d70;
+            cursor: pointer;
+            transition: 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.9rem;
+        }
+        .fun-btn:hover { background: #ffcadb; transform: scale(1.02); }
+
+        .moving-buddy {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            font-size: 3rem;
+            cursor: pointer;
+            z-index: 100;
+            filter: drop-shadow(0 4px 12px #ff88aa);
+            animation: bounce 1s infinite;
+        }
+        @keyframes bounce {
+            0%,100%{ transform: translateY(0); }
+            50%{ transform: translateY(-10px); }
+        }
+
+        .magic-box {
+            background: #fff0f5cc;
+            border-radius: 2rem;
+            padding: 0.8rem;
+            margin: 0.8rem 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+        }
+        .magic-text {
+            font-weight: 600;
+            color: #aa6f89;
+            font-size: 0.9rem;
+            flex: 2;
+        }
+        .magic-btn {
+            background: #ffc0d0;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 2rem;
+            font-weight: bold;
+            color: #a13e60;
+            cursor: pointer;
+        }
+
+        .message-area {
+            background: #ffeef4dd;
+            border-radius: 2rem;
+            padding: 1rem;
+            margin: 1rem 0 0.5rem;
+            font-size: 1rem;
+            font-weight: 600;
+            color: #b85778;
+            border-left: 6px solid #ffa5c0;
+            min-height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .floating-emoji {
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            font-size: 2rem;
+            filter: drop-shadow(0 0 6px #ff99bb);
+            animation: floatUp 1.2s forwards;
+        }
+        @keyframes floatUp {
+            0% { opacity: 1; transform: translateY(0) scale(0.6) rotate(0deg); }
+            100% { opacity: 0; transform: translateY(-90px) scale(1.1) rotate(8deg); }
+        }
+
+        footer {
+            margin-top: 1rem;
+            font-size: 0.65rem;
+            color: #b47b97;
+        }
+
+        @media (max-width: 550px) {
+            .card { padding: 1.3rem; }
+            h1 { font-size: 1.8rem; }
+            .hug-btn { font-size: 1.2rem; min-width: 200px; }
+            .moving-buddy { font-size: 2rem; bottom: 10px; right: 10px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <h1 id="mainTitle">✨ Happy New Year<br>Sweetheart ✨</h1>
+    <div class="sub" id="subText">one hug = 2083 begins</div>
+
+    <div class="countdown-box">
+        <div class="countdown-label" id="countdownLabel">⏳ countdown to 2083 ⏳</div>
+        <div class="timer" id="timerContainer">
+            <div class="time-card"><div class="time-number" id="days">00</div><div class="time-label">days</div></div>
+            <div class="time-card"><div class="time-number" id="hours">00</div><div class="time-label">hours</div></div>
+            <div class="time-card"><div class="time-number" id="minutes">00</div><div class="time-label">mins</div></div>
+            <div class="time-card"><div class="time-number" id="seconds">00</div><div class="time-label">secs</div></div>
+        </div>
+    </div>
+
+    <button class="hug-btn" id="hugButton">🤗 GIVE A HUG → 2083 🤗</button>
+
+    <div class="widgets">
+        <div class="widget-card" id="hugMeterCard">
+            <div class="widget-title">💞 HUG METER</div>
+            <div class="widget-value" id="hugMeterValue">0%</div>
+            <div style="font-size:0.7rem;">click to fill</div>
+        </div>
+        <div class="widget-card" id="cuddleCounterCard">
+            <div class="widget-title">🐻 CUDDLE COUNT</div>
+            <div class="widget-value" id="cuddleCount">0</div>
+            <div style="font-size:0.7rem;">+1 each click</div>
+        </div>
+    </div>
+
+    <div class="fun-buttons">
+        <button class="fun-btn" id="starShowerBtn">✨ STAR SHOWER ✨</button>
+        <button class="fun-btn" id="danceBtn">🕺 DANCE PARTY 🎶</button>
+        <button class="fun-btn" id="cuddleBlastBtn">🤗 CUDDLE BLAST 🤗</button>
+    </div>
+
+    <div class="magic-box">
+        <span class="magic-text" id="magicMessage">✨ ask for a sweet surprise ✨</span>
+        <button class="magic-btn" id="magicBtn">🔮 wish</button>
+    </div>
+
+    <div class="message-area" id="messageBox">
+        <span class="message-text">🌸 hug me → 2083 magic! play with all the buttons 🌸</span>
+    </div>
+
+    <footer>💖 tap anywhere → hearts | click the moving buddy for extra love 💖</footer>
+</div>
+
+<div class="moving-buddy" id="movingBuddy">💗🥰💗</div>
+
+<script>
+    // floating emojis on background click
+    function createFloater(x, y, emoji) {
+        const el = document.createElement('div');
+        el.classList.add('floating-emoji');
+        el.innerHTML = emoji;
+        el.style.left = `${x}px`;
+        el.style.top = `${y}px`;
+        el.style.fontSize = `${Math.random() * 24 + 20}px`;
+        document.body.appendChild(el);
+        setTimeout(() => el.remove(), 1200);
+    }
+    const allEmojis = ['❤️', '💖', '🌸', '🌼', '✨', '💗', '💕', '🤗', '💘', '🎀', '🥰', '🫂', '💞', '⭐', '🌺'];
+    document.addEventListener('click', (e) => {
+        const rand = allEmojis[Math.floor(Math.random() * allEmojis.length)];
+        createFloater(e.clientX, e.clientY, rand);
+    });
+
+    // countdown to April 14, 2026 (2083 start)
+    let celebrationTriggered = false;
+    let countdownInterval;
+
+    function getTarget() { return new Date(2026, 3, 14, 0, 0, 0, 0); }
+
+    function updateCountdownDisplay() {
+        if (celebrationTriggered) return;
+        const now = new Date();
+        const target = getTarget();
+        const diff = target - now;
+        if (diff <= 0 && !celebrationTriggered) {
+            celebrate2083('countdown');
+            return;
+        }
+        if (diff > 0) {
+            const total = Math.floor(diff / 1000);
+            const days = Math.floor(total / 86400);
+            const hours = Math.floor((total % 86400) / 3600);
+            const mins = Math.floor((total % 3600) / 60);
+            const secs = total % 60;
+            document.getElementById('days').innerText = days < 10 ? '0'+days : days;
+            document.getElementById('hours').innerText = hours < 10 ? '0'+hours : hours;
+            document.getElementById('minutes').innerText = mins < 10 ? '0'+mins : mins;
+            document.getElementById('seconds').innerText = secs < 10 ? '0'+secs : secs;
+        } else {
+            document.getElementById('days').innerText = '00';
+            document.getElementById('hours').innerText = '00';
+            document.getElementById('minutes').innerText = '00';
+            document.getElementById('seconds').innerText = '00';
+        }
+    }
+
+    function celebrate2083(origin) {
+        if (celebrationTriggered) return;
+        celebrationTriggered = true;
+        if (countdownInterval) clearInterval(countdownInterval);
+
+        document.getElementById('mainTitle').innerHTML = '🎉 Happy New Year 2083, Sweetheart! 🎉';
+        document.getElementById('subText').innerHTML = '🌸 wrapped in a hug, 2083 is here 🌸';
+        document.getElementById('countdownLabel').innerHTML = '✨ 2083 – YEAR OF LOVE ✨';
+        const timerDiv = document.getElementById('timerContainer');
+        timerDiv.innerHTML = `<div style="background:#ffe0f0; border-radius:2rem; padding:0.6rem; width:100%;">
+            <span style="font-size:1.6rem; font-weight:bold;">🎊 २०८३ 🎊</span><br>
+            <span style="font-size:0.8rem;">🤗 new year, endless hugs 🤗</span>
+        </div>`;
+        document.getElementById('messageBox').innerHTML = `<span class="message-text">🤗💖 HAPPY NEW YEAR 2083, SWEETHEART! 💖🤗<br>Your hug brought the new year. I love you! 🎆🌸</span>`;
+
+        canvasConfetti({ particleCount: 400, spread: 130, origin: { y: 0.6 }, startVelocity: 22, colors: ['#ff99bb', '#ffcc88', '#ffb3ba', '#ff8c94'] });
+        canvasConfetti({ particleCount: 200, spread: 85, origin: { y: 0.4, x: 0.2 }, colors: ['#ffc4a3', '#ffb7c5'] });
+        canvasConfetti({ particleCount: 200, spread: 85, origin: { y: 0.4, x: 0.8 }, colors: ['#ffd6b0', '#ff9faa'] });
+
+        const btnRect = document.getElementById('hugButton').getBoundingClientRect();
+        for (let i = 0; i < 50; i++) {
+            setTimeout(() => {
+                const x = btnRect.left + btnRect.width/2 + (Math.random() - 0.5) * 150;
+                const y = btnRect.top + btnRect.height/2 + (Math.random() - 0.5) * 120;
+                createFloater(x, y, Math.random() > 0.4 ? '🤗' : '💖');
+            }, i * 30);
+        }
+        for (let i = 0; i < 60; i++) {
+            setTimeout(() => {
+                const randX = Math.random() * window.innerWidth;
+                const randY = Math.random() * window.innerHeight;
+                const arr = ['💖', '🌸', '🎉', '🇳🇵', '💗', '🤗', '⭐', '🎊'];
+                createFloater(randX, randY, arr[Math.floor(Math.random() * arr.length)]);
+            }, i * 25);
+        }
+
+        const hugBtn = document.getElementById('hugButton');
+        hugBtn.innerHTML = '💖🤗 2083 FOREVER 🤗💖';
+        hugBtn.disabled = true;
+        hugBtn.style.opacity = '0.8';
+        hugBtn.style.cursor = 'default';
+        hugBtn.style.animation = 'none';
+    }
+
+    function startCountdown() {
+        updateCountdownDisplay();
+        countdownInterval = setInterval(updateCountdownDisplay, 1000);
+    }
+    startCountdown();
+
+    // HUG BUTTON
+    const hugButton = document.getElementById('hugButton');
+    hugButton.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (celebrationTriggered) return;
+        const rect = hugButton.getBoundingClientRect();
+        for (let i = 0; i < 25; i++) {
+            setTimeout(() => {
+                const x = rect.left + rect.width/2 + (Math.random() - 0.5) * 100;
+                const y = rect.top + rect.height/2 + (Math.random() - 0.5) * 80;
+                createFloater(x, y, '🤗');
+            }, i * 40);
+        }
+        const msgBox = document.getElementById('messageBox');
+        msgBox.innerHTML = `<span class="message-text">🤗 a warm hug... now we step into 2083 together! 🤗</span>`;
+        setTimeout(() => { celebrate2083('button'); }, 200);
+    });
+
+    // WIDGETS: hug meter & cuddle counter (always work)
+    let hugMeter = 0;
+    let cuddleCount = 0;
+    const hugMeterElem = document.getElementById('hugMeterValue');
+    const cuddleCountElem = document.getElementById('cuddleCount');
+    const hugMeterCard = document.getElementById('hugMeterCard');
+    const cuddleCard = document.getElementById('cuddleCounterCard');
+
+    function updateHugMeter(inc) {
+        hugMeter = Math.min(100, hugMeter + inc);
+        hugMeterElem.innerText = hugMeter + '%';
+        if (hugMeter >= 100 && !celebrationTriggered) {
+            canvasConfetti({ particleCount: 100, spread: 70, origin: { y: 0.7 }, colors: ['#ffaa88', '#ffccaa'] });
+            for(let i=0;i<12;i++) setTimeout(()=> createFloater(Math.random()*window.innerWidth, Math.random()*window.innerHeight, '💖'), i*50);
+            document.getElementById('messageBox').innerHTML = `<span class="message-text">💯 hug meter full! press the big hug button for 2083! 💯</span>`;
+        }
+    }
+    hugMeterCard.addEventListener('click', (e) => {
+        e.stopPropagation();
+        updateHugMeter(10);
+        createFloater(e.clientX, e.clientY, '⚡');
+    });
+    cuddleCard.addEventListener('click', (e) => {
+        e.stopPropagation();
+        cuddleCount++;
+        cuddleCountElem.innerText = cuddleCount;
+        createFloater(e.clientX, e.clientY, '🐻');
+        if (cuddleCount % 5 === 0) canvasConfetti({ particleCount: 50, spread: 40, origin: { y: 0.7 }, colors: ['#ffb7c5'] });
+    });
+
+    // STAR SHOWER (always works)
+    document.getElementById('starShowerBtn').addEventListener('click', (e) => {
+        e.stopPropagation();
+        for (let i = 0; i < 40; i++) {
+            setTimeout(() => {
+                const x = Math.random() * window.innerWidth;
+                const y = Math.random() * window.innerHeight;
+                const starEmoji = ['⭐', '🌟', '✨', '💫', '⭐', '🌟'][Math.floor(Math.random()*6)];
+                createFloater(x, y, starEmoji);
+            }, i * 30);
+        }
+        canvasConfetti({ particleCount: 150, spread: 100, origin: { y: 0.5 }, colors: ['#ffe066', '#ffd700', '#ffcc00'], shapes: ['star'] });
+        document.getElementById('messageBox').innerHTML = `<span class="message-text">⭐✨ a star shower just for you, sweetheart! you're my brightest star ✨⭐</span>`;
+        setTimeout(() => {
+            if (document.getElementById('messageBox').innerHTML.includes('star shower')) {
+                setTimeout(() => document.getElementById('messageBox').innerHTML = `<span class="message-text">🌸 keep playing! the party never stops 🌸</span>`, 2500);
+            }
+        }, 2500);
+    });
+
+    // DANCE PARTY (always works)
+    document.getElementById('danceBtn').addEventListener('click', (e) => {
+        e.stopPropagation();
+        const card = document.querySelector('.card');
+        card.style.transform = 'rotate(1deg) scale(1.01)';
+        setTimeout(() => card.style.transform = '', 300);
+        for (let i=0;i<20;i++) {
+            setTimeout(() => {
+                createFloater(Math.random()*window.innerWidth, Math.random()*window.innerHeight, '🕺');
+            }, i*60);
+        }
+        canvasConfetti({ particleCount: 120, spread: 100, origin: { y: 0.6 }, colors: ['#ffcc88', '#ffa5c0'] });
+        document.getElementById('messageBox').innerHTML = `<span class="message-text">💃🕺 dance party! you're the rhythm of my heart 🎶</span>`;
+        setTimeout(() => {
+            if (document.getElementById('messageBox').innerHTML.includes('dance party')) {
+                setTimeout(() => document.getElementById('messageBox').innerHTML = `<span class="message-text">💖 keep dancing! 2083 is ours 💖</span>`, 2500);
+            }
+        }, 2500);
+    });
+
+    // CUDDLE BLAST (always works, adds +5 cuddles)
+    document.getElementById('cuddleBlastBtn').addEventListener('click', (e) => {
+        e.stopPropagation();
+        for (let step = 0; step < 5; step++) {
+            setTimeout(() => {
+                cuddleCount++;
+                cuddleCountElem.innerText = cuddleCount;
+                if (cuddleCount % 5 === 0) canvasConfetti({ particleCount: 40, spread: 40, origin: { y: 0.7 }, colors: ['#ffb7c5'] });
+            }, step * 80);
+        }
+        for (let i = 0; i < 35; i++) {
+            setTimeout(() => {
+                const x = Math.random() * window.innerWidth;
+                const y = Math.random() * window.innerHeight;
+                createFloater(x, y, '🤗');
+            }, i * 40);
+        }
+        canvasConfetti({ particleCount: 130, spread: 90, origin: { y: 0.6 }, colors: ['#ffaa99', '#ffccbb'] });
+        document.getElementById('messageBox').innerHTML = `<span class="message-text">🤗💥 CUDDLE BLAST! +5 cuddles! wrapping you in a warm hug explosion 💥🤗</span>`;
+        setTimeout(() => {
+            if (document.getElementById('messageBox').innerHTML.includes('CUDDLE BLAST')) {
+                setTimeout(() => document.getElementById('messageBox').innerHTML = `<span class="message-text">💗 cuddle party never ends! 💗</span>`, 2500);
+            }
+        }, 2500);
+    });
+
+    // MAGIC WISH (always works)
+    const magicBtn = document.getElementById('magicBtn');
+    const magicMsgSpan = document.getElementById('magicMessage');
+    const wishes = [
+        "💫 you make my world sparkle ✨", "🌸 every hug from you is a miracle 🌸", "💖 2083 will be our sweetest chapter 💖",
+        "🤗 i'm sending you a thousand hugs right now 🤗", "⭐ you are my favourite daydream ⭐", "🎀 may our love grow brighter than fireworks 🎀",
+        "💗 you + me = endless happiness 💗", "🌙 i fall for you more every single day 🌙", "🎉 let's dance into 2083 together! 🎉",
+        "💕 you're the best thing that ever happened to me 💕"
+    ];
+    magicBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const randomWish = wishes[Math.floor(Math.random() * wishes.length)];
+        magicMsgSpan.innerHTML = randomWish;
+        for(let i=0;i<8;i++) {
+            setTimeout(() => {
+                const x = Math.random() * window.innerWidth;
+                const y = Math.random() * window.innerHeight * 0.7 + 100;
+                createFloater(x, y, '💖');
+            }, i*60);
+        }
+        canvasConfetti({ particleCount: 40, spread: 45, origin: { y: 0.7 }, colors: ['#ffccdd', '#ffb3c6'] });
+        setTimeout(() => {
+            if (magicMsgSpan.innerHTML === randomWish) {
+                setTimeout(() => magicMsgSpan.innerHTML = "✨ ask for a sweet surprise ✨", 2000);
+            }
+        }, 2000);
+    });
+
+    // MOVING BUDDY (always works)
+    const buddy = document.getElementById('movingBuddy');
+    buddy.addEventListener('click', (e) => {
+        e.stopPropagation();
+        for (let i=0;i<15;i++) {
+            setTimeout(() => {
+                const x = buddy.getBoundingClientRect().left + 20;
+                const y = buddy.getBoundingClientRect().top + 20;
+                createFloater(x + (Math.random()-0.5)*40, y + (Math.random()-0.5)*40, '🥰');
+            }, i*50);
+        }
+        canvasConfetti({ particleCount: 60, spread: 50, origin: { y: 0.8 }, colors: ['#ff99bb'] });
+        document.getElementById('messageBox').innerHTML = `<span class="message-text">🥰 my heart does a happy dance whenever you're near 🥰</span>`;
+        setTimeout(() => {
+            if (document.getElementById('messageBox').innerHTML.includes('happy dance')) {
+                setTimeout(() => document.getElementById('messageBox').innerHTML = `<span class="message-text">💗 you + me = 2083 magic 💗</span>`, 2000);
+            }
+        }, 2000);
+    });
+
+    // background sparkles
+    function createBgSparkles() {
+        for (let i=0; i<60; i++) {
+            const sp = document.createElement('div');
+            sp.classList.add('sparkle-bg');
+            const sz = Math.random() * 10 + 3;
+            sp.style.width = `${sz}px`;
+            sp.style.height = `${sz}px`;
+            sp.style.left = `${Math.random() * 100}%`;
+            sp.style.top = `${Math.random() * 100}%`;
+            sp.style.animationDelay = `${Math.random() * 6}s`;
+            sp.style.animationDuration = `${Math.random() * 5 + 4}s`;
+            document.body.appendChild(sp);
+        }
+    }
+    createBgSparkles();
+
+    window.addEventListener('load', () => {
+        canvasConfetti({ particleCount: 60, spread: 45, origin: { y: 0.65 }, colors: ['#ffb7c5', '#ffd6b0'] });
+    });
+</script>
+</body>
+</html>
